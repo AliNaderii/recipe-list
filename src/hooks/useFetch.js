@@ -1,22 +1,34 @@
 // tools
 import { useEffect, useState } from 'react';
 
-export const useFetch = (url) => {
+export const useFetch = (url, method = 'GET') => {
   // states
   const [ data, setData ] = useState(null);
   const [ error, setError ] = useState(null);
   const [ isPending, setIsPending ] = useState(false);
+  const [ options, setOptions ] = useState(null);
+
+  // a function for creating a post object
+  const postData = (postOptions) => {
+    setOptions({
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(postOptions)
+    });
+  };
 
   useEffect(() => {
     const controller = new AbortController();
 
     // declare fetch function
-    const fetchData = async () => {
+    const fetchData = async (options) => {
       setIsPending(true);
 
-      // init fetching proccess
+      // init fetching proccess with provided options
       try {
-        const res = await fetch(url, { signal: controller.signal });
+        const res = await fetch(url, { ...options, signal: controller.signal });
         // see if the recived response is ok
         if (!res.ok) {
           throw new Error(res.statusText);
@@ -43,16 +55,21 @@ export const useFetch = (url) => {
       }
     };
 
-    // invoke fetch function
-    fetchData();
+    // invoke fetch function with defferent conditions
+    if (method === 'POST' && options) {
+      fetchData(options);
+    }
+    if (method === 'GET') {
+      fetchData();
+    }
 
     // return cleanup function
     return () => {
       controller.abort();
     };
 
-  }, [ url ]);
+  }, [ url, options, method ]);
 
 
-  return { data, error, isPending };
+  return { data, error, isPending, postData };
 };
