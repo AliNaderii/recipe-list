@@ -13,8 +13,16 @@
 
 nav .logo {
   margin-right: auto;
+}
+
+nav .logo a {
   color: #fff;
   text-decoration: none;
+}
+
+nav .searchbar {
+  display: flex;
+  align-items: center;
 }
 
 nav .btn {
