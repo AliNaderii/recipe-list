@@ -1,5 +1,6 @@
 // tools
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { ThemeContextProvider } from './context/ThemeContext';
 
 // components
 import Home from './pages/home/Home';
@@ -14,18 +15,20 @@ import './App.css';
 
 function App() {
   return (
-    <div className="App">
-      <BrowserRouter>
-        <Navbar />
-        <ThemeSelector />
-        <Routes>
-          <Route path='/' element={ <Home /> } />
-          <Route path='/search' element={ <Search /> } />
-          <Route path='/create' element={ <Create /> } />
-          <Route path='/recipes/:id' element={ <Recipe /> } />
-        </Routes>
-      </BrowserRouter>
-    </div>
+    <ThemeContextProvider>
+      <div className="App">
+        <BrowserRouter>
+          <Navbar />
+          <ThemeSelector />
+          <Routes>
+            <Route path='/' element={ <Home /> } />
+            <Route path='/search' element={ <Search /> } />
+            <Route path='/create' element={ <Create /> } />
+            <Route path='/recipes/:id' element={ <Recipe /> } />
+          </Routes>
+        </BrowserRouter>
+      </div>
+    </ThemeContextProvider>
   );
 }
 

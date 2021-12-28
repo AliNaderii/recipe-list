@@ -2,6 +2,7 @@
 import { useState, useRef } from 'react';
 import { useFetch } from '../../hooks/useFetch';
 import { useNavigate } from 'react-router-dom';
+import { useTheme } from '../../hooks/useTheme';
 
 // styles
 import './Create.css';
@@ -13,6 +14,8 @@ export default function Create() {
   const [ time, setTime ] = useState('');
   const [ newIng, setNewIng ] = useState('');
   const [ ings, setIngs ] = useState([]);
+  // context value
+  const { color } = useTheme();
   // a refrence for keeping the focus on input field
   const ingInput = useRef(null);
   // data-posting requirements
@@ -73,7 +76,11 @@ export default function Create() {
               value={ newIng }
               ref={ ingInput }
             />
-            <button className='btn' onClick={ handleAdd }>Add</button>
+            <button
+              className='btn'
+              onClick={ handleAdd }
+              style={ { backgroundColor: color } }
+            >Add</button>
           </div>
           <p>{ ings.map(ing => `${ing}, `) }</p>
         </label>
@@ -99,7 +106,7 @@ export default function Create() {
         { error && <p>{ error }</p> }
         { isPending && <p>Please wait a moment</p> }
 
-        <button className='btn'>Submit</button>
+        <button className='btn' style={ { backgroundColor: color } }>Submit</button>
       </form>
     </div>
   );
