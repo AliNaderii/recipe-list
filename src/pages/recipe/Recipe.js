@@ -1,18 +1,23 @@
 // tools
 import { useParams } from 'react-router-dom';
 import { useFetch } from '../../hooks/useFetch';
+import { useTheme } from '../../hooks/useTheme';
 
 // styles
 import './Recipe.css';
 
 export default function Recipe() {
+  // search bar params
   const { id } = useParams();
+
   const url = 'http://localhost:3000/recipes/' + id;
   const { data: recipe, error, isPending } = useFetch(url);
-  console.log(recipe);
+
+  // context hook value
+  const { theme } = useTheme();
 
   return (
-    <div className='details'>
+    <div className={ `details ${theme}` }>
       { isPending && <p className='loading'>Loading</p> }
       { error && <p className={ error }>{ error }</p> }
       { recipe && (

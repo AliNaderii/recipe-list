@@ -1,6 +1,6 @@
 // tools
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import { ThemeContextProvider } from './context/ThemeContext';
+import { useTheme } from './hooks/useTheme';
 
 // components
 import Home from './pages/home/Home';
@@ -14,21 +14,22 @@ import ThemeSelector from './components/ThemeSelector';
 import './App.css';
 
 function App() {
+  // context hook value
+  const { theme } = useTheme();
+
   return (
-    <ThemeContextProvider>
-      <div className="App">
-        <BrowserRouter>
-          <Navbar />
-          <ThemeSelector />
-          <Routes>
-            <Route path='/' element={ <Home /> } />
-            <Route path='/search' element={ <Search /> } />
-            <Route path='/create' element={ <Create /> } />
-            <Route path='/recipes/:id' element={ <Recipe /> } />
-          </Routes>
-        </BrowserRouter>
-      </div>
-    </ThemeContextProvider>
+    <div className={ `App ${theme}` }>
+      <BrowserRouter>
+        <Navbar />
+        <ThemeSelector />
+        <Routes>
+          <Route path='/' element={ <Home /> } />
+          <Route path='/search' element={ <Search /> } />
+          <Route path='/create' element={ <Create /> } />
+          <Route path='/recipes/:id' element={ <Recipe /> } />
+        </Routes>
+      </BrowserRouter>
+    </div>
   );
 }
 

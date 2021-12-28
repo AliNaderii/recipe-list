@@ -51,3 +51,12 @@ textarea {
 li {
   list-style-type: none;
 }
+
+/* dark mode */
+.dark .page-title,
+.dark .loading,
+.dark .error,
+.dark label,
+.dark p {
+  color: #e4e4e4;
+}
