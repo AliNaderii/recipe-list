@@ -1,0 +1,32 @@
+.theme-container {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  padding: 10px 60px;
+}
+
+.theme-selector {
+  margin-right: auto;
+  margin-left: 10px;
+}
+
+.theme-selector img {
+  width: 25px;
+  height: 25px;
+  cursor: pointer;
+}
+
+.color-selector {
+  display: flex;
+}
+.color-selector div {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  margin-right: 10px;
+  cursor: pointer;
+}
+
+.sun.light {
+  filter: invert(100%);
+}

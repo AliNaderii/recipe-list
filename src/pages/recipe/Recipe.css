@@ -37,3 +37,13 @@ p.method {
   line-height: 1.5em;
   margin-top: 20px;
 }
+
+/* dark mode */
+.details.dark {
+  background: #555;
+  color: #e4e4e4;
+}
+
+.details.dark li {
+  color: #999;
+}

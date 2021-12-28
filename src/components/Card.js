@@ -1,12 +1,16 @@
 // tools
 import { Link } from "react-router-dom";
+import { useTheme } from "../hooks/useTheme";
 
 // styles
 import './Card.css';
 
 export default function Card({ recipe }) {
+  // context value
+  const { theme } = useTheme();
+
   return (
-    <div className='card'>
+    <div className={ `card ${theme}` }>
       <h3>{ recipe.title }</h3>
 
       <p>Takes: { recipe.cookingTime } to cook</p>
